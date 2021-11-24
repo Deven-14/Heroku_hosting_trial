@@ -11,12 +11,40 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <meta name="google-signin-client_id" content="1043455465762-u2mijmmg09l8kib4b778qki8leh3t06e.apps.googleusercontent.com">
+
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <h1>new app</h1>
-        <script src="" async defer></script>
+        <h1 id="header1">new app</h1>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        
+        <script>
+            function onSignIn(googleUser) {
+
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+                document.getElementById("header1").innerHTML = "signed in";
+            }
+        </script>
+<!-- https://heroku-hosting-trial.herokuapp.com -->
+<!-- https://heroku-hosting-trial.herokuapp.com/ -->
+        <a href="/" onclick="signOut();">Sign out</a>
+        <script>
+          function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+              console.log('User signed out.');
+            });
+            document.getElementById("header1").innerHTML = "signed out";
+          }
+        </script>
     </body>
 </html>
