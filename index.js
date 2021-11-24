@@ -9,6 +9,11 @@ app.get('/', (req, res) => {
     res.render("index.ejs");
 });
 
+app.post('/', (req, res) => {
+    //res.send("Hello world");
+    res.render("index.ejs");
+});
+
 app.listen(port, () => {
     console.log(`app listening at ${port}`);
 });
